@@ -17,14 +17,14 @@ pipeline {
             steps {
                 sh 'python3 -m venv ${VIRTUAL_ENV}'
                 sh 'echo ${WORKSPACE}'
-                sh 'source ${VIRTUAL_ENV}/bin/activate'
+                sh 'source ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
                 sh 'pip install --upgrade pip'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'source ${VIRTUAL_ENV}/bin/activate'
+                sh 'source ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
                 sh 'pip install -r requirements.txt'
             }
         }
@@ -41,7 +41,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'source ${VIRTUAL_ENV}/bin/activate'
+                sh 'source ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
                 sh 'python -m pytest tests/ --junitxml=test-results.xml'                
             }
         }
