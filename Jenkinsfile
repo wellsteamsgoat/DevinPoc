@@ -53,7 +53,7 @@ script {
                         ]
                     }"""
                     server.upload spec: uploadSpec
-                }
+                
         }
     }
 }
