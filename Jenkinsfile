@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PYTHON_VERSION = "3.9"
+        //PYTHON_VERSION = "3.9"
         VIRTUAL_ENV = "venv"
     }
 
