@@ -16,6 +16,7 @@ pipeline {
         stage('Setup Environment') {
             steps {
                 sh 'python3 -m venv ${VIRTUAL_ENV}'
+                sh 'echo ${WORKSPACE}'
                 sh 'source ${VIRTUAL_ENV}/bin/activate'
                 sh 'pip install --upgrade pip'
             }
