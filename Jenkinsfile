@@ -42,7 +42,8 @@ pipeline {
         }
 
         stage('Archive Artifacts') {
-script {
+            steps {
+                script {
                     def server = Artifactory.server 'artifactory'
                     def uploadSpec = """{
                         "files": [
@@ -53,7 +54,8 @@ script {
                         ]
                     }"""
                     server.upload spec: uploadSpec
-                
+                }
+            }
         }
     }
 }
