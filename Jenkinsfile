@@ -18,14 +18,14 @@ pipeline {
                 sh 'python3 -m venv ${VIRTUAL_ENV}'
                 sh 'echo ${WORKSPACE}'
                 //sh 'source . ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
-                sh 'pip install --upgrade pip'
+                sh '${WORKSPACE}/${VIRTUAL_ENV}/bin/pip install --upgrade pip'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'source ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
-                sh 'pip install -r requirements.txt'
+                //sh 'source ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
+                sh '${WORKSPACE}/${VIRTUAL_ENV}/bin/pip install -r requirements.txt'
             }
         }
 
