@@ -42,10 +42,18 @@ pipeline {
         }
 
         stage('Archive Artifacts') {
-            steps {
-                // Archive created artifacts, typically in 'dist/'
-                archiveArtifacts artifacts: 'dist/*.whl, dist/*.tar.gz', onlyIfSuccessful: true
-            }
+script {
+                    def server = Artifactory.server 'artifactory'
+                    def uploadSpec = """{
+                        "files": [
+                            {
+                                "pattern": "dist/*.whl",
+                                "target": "python/Devin/${BUILD_NUMBER}/"
+                            }
+                        ]
+                    }"""
+                    server.upload spec: uploadSpec
+                }
         }
     }
 }
