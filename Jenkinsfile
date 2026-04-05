@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh 'python3 -m venv ${VIRTUAL_ENV}'
                 sh 'echo ${WORKSPACE}'
-                sh 'source . ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
+                //sh 'source . ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
                 sh 'pip install --upgrade pip'
             }
         }
