@@ -15,41 +15,33 @@ pipeline {
 
         stage('Setup Environment') {
             steps {
-                sh '''
-                    python3 -m venv ${VIRTUAL_ENV}
-                    source ${VIRTUAL_ENV}/bin/activate
-                    pip install --upgrade pip
-                '''
+                sh 'python3 -m venv ${VIRTUAL_ENV}'
+                sh 'source ${VIRTUAL_ENV}/bin/activate'
+                sh 'pip install --upgrade pip'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh '''
-                    source ${VIRTUAL_ENV}/bin/activate
-                    pip install -r requirements.txt
-                '''
+                sh 'source ${VIRTUAL_ENV}/bin/activate'
+                sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Build & Package') {
             steps {
                 // Setup virtualenv, install requirements, and build sdist/wheel
-                sh """
-                python3 -m venv venv
-                . venv/bin/activate
-                pip install -r requirements.txt
-                python setup.py sdist bdist_wheel
-                """
+                sh 'python3 -m venv venv'
+                sh '. venv/bin/activate'
+                sh 'pip install -r requirements.txt'
+                sh 'python setup.py sdist bdist_wheel'                
             }
         }
 
         stage('Test') {
             steps {
-                sh '''
-                    source ${VIRTUAL_ENV}/bin/activate
-                    python -m pytest tests/ --junitxml=test-results.xml
-                '''
+                sh 'source ${VIRTUAL_ENV}/bin/activate'
+                sh 'python -m pytest tests/ --junitxml=test-results.xml'                
             }
         }
 
