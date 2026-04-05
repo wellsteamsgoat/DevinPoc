@@ -31,18 +31,13 @@ pipeline {
 
         stage('Build & Package') {
             steps {
-                // Setup virtualenv, install requirements, and build sdist/wheel
-                sh 'python3 -m venv venv'
-                sh '. venv/bin/activate'
-                sh 'pip install -r requirements.txt'
-                sh 'python setup.py sdist bdist_wheel'                
+                sh '${WORKSPACE}/${VIRTUAL_ENV}/bin/python setup.py sdist bdist_wheel'                
             }
         }
 
         stage('Test') {
             steps {
-                sh 'source ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
-                sh 'python -m pytest tests/ --junitxml=test-results.xml'                
+                sh '${WORKSPACE}/${VIRTUAL_ENV}/bin/python -m pytest tests/ --junitxml=test-results.xml'                
             }
         }
 
