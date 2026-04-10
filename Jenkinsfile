@@ -19,6 +19,7 @@ pipeline {
                 sh 'echo ${WORKSPACE}'
                 //sh 'source . ${WORKSPACE}/${VIRTUAL_ENV}/bin/activate'
                 sh '${WORKSPACE}/${VIRTUAL_ENV}/bin/pip install --upgrade pip'
+                h 'sleep 120'
             }
         }
 
