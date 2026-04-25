@@ -1,2 +1,3 @@
-pytest>=8.0.0
-setuptools
+```
+cHl0ZXN0Pj04LjAuMApzZXR1cHRvb2xzCmZsYXNrCg==
+```
