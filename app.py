@@ -1,5 +1,4 @@
-```python
-from flask import Flask, jsonify
+from flask import jsonify
 
 app = Flask(__name__)
 
@@ -13,4 +12,3 @@ def health():
 
 if __name__ == "__main__":
     app.run(debug=True)
-```
