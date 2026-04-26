@@ -1,0 +1,75 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Path Configuration API",
+    "description": "API for configuring environment paths with inclusion and exclusion filters.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/configure": {
+      "post": {
+        "summary": "Configure paths for a given environment",
+        "operationId": "configurePaths",
+        "parameters": [
+          {
+            "name": "environment",
+            "in": "query",
+            "required": true,
+            "description": "Target environment",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "dev",
+                "nonprod",
+                "dse"
+              ]
+            }
+          },
+          {
+            "name": "included_path",
+            "in": "query",
+            "required": false,
+            "description": "Paths to include (one per line)",
+            "schema": {
+              "type": "string",
+              "format": "textarea"
+            }
+          },
+          {
+            "name": "excluded_path",
+            "in": "query",
+            "required": false,
+            "description": "Paths to exclude (one per line)",
+            "schema": {
+              "type": "string",
+              "format": "textarea"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configuration applied successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    }
+  }
+}
