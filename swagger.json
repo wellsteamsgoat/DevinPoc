@@ -1,0 +1,73 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Path Configuration API",
+    "description": "API for configuring environment paths with inclusion and exclusion filters.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/configure": {
+      "post": {
+        "summary": "Configure paths for a given environment",
+        "operationId": "configurePaths",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "environment"
+                ],
+                "properties": {
+                  "environment": {
+                    "type": "string",
+                    "description": "Target environment",
+                    "enum": [
+                      "dev",
+                      "nonprod",
+                      "dse"
+                    ]
+                  },
+                  "included_path": {
+                    "type": "string",
+                    "description": "Paths to include (one per line)",
+                    "format": "textarea"
+                  },
+                  "excluded_path": {
+                    "type": "string",
+                    "description": "Paths to exclude (one per line)",
+                    "format": "textarea"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Configuration applied successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    }
+  }
+}
