@@ -10,40 +10,42 @@
       "post": {
         "summary": "Configure paths for a given environment",
         "operationId": "configurePaths",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "environment"
-                ],
-                "properties": {
-                  "environment": {
-                    "type": "string",
-                    "description": "Target environment",
-                    "enum": [
-                      "dev",
-                      "nonprod",
-                      "dse"
-                    ]
-                  },
-                  "included_path": {
-                    "type": "string",
-                    "description": "Paths to include (one per line)",
-                    "format": "textarea"
-                  },
-                  "excluded_path": {
-                    "type": "string",
-                    "description": "Paths to exclude (one per line)",
-                    "format": "textarea"
-                  }
-                }
-              }
+        "parameters": [
+          {
+            "name": "environment",
+            "in": "query",
+            "required": true,
+            "description": "Target environment",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "dev",
+                "nonprod",
+                "dse"
+              ]
+            }
+          },
+          {
+            "name": "included_path",
+            "in": "query",
+            "required": false,
+            "description": "Paths to include (one per line)",
+            "schema": {
+              "type": "string",
+              "format": "textarea"
+            }
+          },
+          {
+            "name": "excluded_path",
+            "in": "query",
+            "required": false,
+            "description": "Paths to exclude (one per line)",
+            "schema": {
+              "type": "string",
+              "format": "textarea"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Configuration applied successfully",
